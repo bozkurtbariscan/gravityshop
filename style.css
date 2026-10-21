@@ -1,0 +1,128 @@
+/* Gravity Shop — site styles (the game's palette: cream, ink, blue, yellow, green, pink). */
+
+@font-face {
+  font-family: "Fredoka";
+  src: url("assets/fredoka-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --cream: #FFF6E9;
+  --cream-dark: #F1E2CB;
+  --paper: #FFFFFF;
+  --ink: #2B2B3A;
+  --ink-soft: rgba(43, 43, 58, 0.72);
+  --line: rgba(43, 43, 58, 0.14);
+  --blue: #3D7BFF;
+  --yellow: #FFC83D;
+  --green: #3DDC84;
+  --pink: #FF5CA8;
+  --link: #2A5FD6;
+  --shadow: 0 6px 0 rgba(43, 43, 58, 0.12);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cream: #1E1E29;
+    --cream-dark: #2A2A38;
+    --paper: #2B2B3A;
+    --ink: #FFF6E9;
+    --ink-soft: rgba(255, 246, 233, 0.76);
+    --line: rgba(255, 246, 233, 0.16);
+    --link: #A9C6FF;
+    --shadow: 0 6px 0 rgba(0, 0, 0, 0.35);
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  background-image: radial-gradient(var(--cream-dark) 1.6px, transparent 1.6px);
+  background-size: 26px 26px;
+  color: var(--ink);
+  font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+a { color: var(--link); text-underline-offset: 3px; }
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 20px 16px 40px; }
+
+/* top bar: the icon and name, the language switch */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+.brand { display: flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none; }
+.brand img { width: 52px; height: 52px; border-radius: 12px; box-shadow: var(--shadow); }
+.brand span { font-family: "Fredoka", -apple-system, sans-serif; font-weight: 700; font-size: 22px; }
+
+.langs { display: flex; gap: 6px; }
+.langs a {
+  padding: 6px 12px; border: 2px solid var(--ink); border-radius: 999px;
+  color: var(--ink); background: var(--paper); text-decoration: none; font-weight: 600; font-size: 14px;
+}
+.langs a[aria-current="true"] { background: var(--yellow); color: #2B2B3A; }
+
+/* the card the text sits on */
+.card {
+  background: var(--paper); border: 3px solid var(--ink); border-radius: 24px;
+  padding: 24px 22px; box-shadow: var(--shadow);
+}
+
+h1, h2 { font-family: "Fredoka", -apple-system, sans-serif; font-weight: 700; line-height: 1.2; }
+h1 { font-size: 34px; margin: 0 0 6px; }
+h2 { font-size: 22px; margin: 28px 0 8px; }
+p, ul { margin: 0 0 12px; }
+ul { padding-left: 22px; }
+li { margin-bottom: 6px; }
+
+.meta { color: var(--ink-soft); font-size: 15px; margin-bottom: 16px; }
+.lead { font-size: 18px; }
+
+.callout {
+  border: 2px solid var(--ink); border-radius: 16px; padding: 12px 16px; margin: 16px 0 4px;
+  background: rgba(61, 220, 132, 0.2);
+}
+
+.todo { color: #D9438A; font-weight: 700; }
+
+/* both languages show without JavaScript; with it, only the chosen one */
+.l10n + .l10n { margin-top: 28px; padding-top: 24px; border-top: 2px dashed var(--line); }
+html[data-lang="tr"] .l10n[lang="en"],
+html[data-lang="en"] .l10n[lang="tr"] { display: none; }
+html[data-lang] .l10n + .l10n { margin-top: 0; padding-top: 0; border-top: 0; }
+
+/* short inline translations (links): "Türkçe / English" without JavaScript, one of them with it */
+.t + .t::before { content: " / "; }
+html[data-lang="tr"] .t[lang="en"],
+html[data-lang="en"] .t[lang="tr"] { display: none; }
+html[data-lang] .t + .t::before { content: none; }
+
+/* home page */
+.hero { text-align: center; }
+.hero .logo { width: min(420px, 90%); height: auto; margin: 8px auto 4px; display: block; }
+.hero .tagline { font-family: "Fredoka", -apple-system, sans-serif; font-weight: 700; font-size: 24px; margin: 8px 0; }
+.badge {
+  display: inline-block; margin-top: 8px; padding: 8px 16px; border: 2px solid var(--ink); border-radius: 999px;
+  background: var(--yellow); color: #2B2B3A; font-weight: 700;
+}
+.links { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
+.links a {
+  display: block; padding: 16px; border: 3px solid var(--ink); border-radius: 18px; background: var(--paper);
+  color: var(--ink); text-decoration: none; font-weight: 700; box-shadow: var(--shadow);
+}
+.links a small { display: block; font-weight: 400; color: var(--ink-soft); margin-top: 2px; }
+
+footer { margin-top: 24px; text-align: center; color: var(--ink-soft); font-size: 14px; }
+footer nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 6px; }
+
+@media (max-width: 520px) {
+  h1 { font-size: 28px; }
+  .card { padding: 20px 16px; border-radius: 20px; }
+  .links { grid-template-columns: 1fr; }
+  .brand span { font-size: 19px; }
+}
